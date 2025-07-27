@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Truth or Dare - Drinking Game</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main id="app">
+
+  <section id="intro-screen" class="screen active">
+    <div class="intro-content">
+        <h1 class="title">TRUTH<br>OR<br>DARE</h1>
+        <p class="subtitle" data-key="introSubtitle"></p>
+    </div>
+    <div class="intro-buttons">
+      <button id="intro-start-btn" type="button" class="btn btn-primary" data-key="playBtn"></button>
+      <button id="intro-language-btn" type="button" class="btn btn-secondary" data-key="languageBtn"></button>
+      <button id="intro-credits-btn" type="button" class="btn btn-secondary" data-key="creditsBtn"></button>
+      </div>
+  </section>
+
+  <section id="player-setup-screen" class="screen">
+    <div class="screen-header">
+        <button id="back-to-intro-btn" class="btn-icon back-btn">&larr;</button>
+        <h1 class="screen-title" data-key="playerSetupTitle"></h1>
+    </div>
+
+    <div id="players-section">
+      <div id="players-list"></div>
+      <div class="player-action-buttons">
+        <button id="add-player-btn" type="button" class="btn btn-secondary" data-key="addPlayerBtn"></button>
+        <button id="remove-player-btn" type="button" class="btn btn-secondary" data-key="removePlayerBtn"></button>
+      </div>
+
+       <div class="game-option-section">
+            <div class="option-toggle">
+                <input type="checkbox" id="enable-lives-checkbox">
+                <label for="enable-lives-checkbox" class="toggle-label" data-key="enableLivesMode"></label>
+            </div>
+            <div id="lives-settings" class="hidden">
+                <label for="initial-lives-input" data-key="startingLives"></label>
+                <input type="number" id="initial-lives-input" value="3" min="1" max="10">
+            </div>
+       </div>
+
+    </div>
+
+    <button id="proceed-to-categories-btn" type="button" class="btn btn-primary" disabled data-key="selectCategoriesBtn"></button>
+  </section>
+
+  <section id="category-selection-screen" class="screen">
+    <div class="screen-header">
+        <button id="back-to-player-setup-btn" class="btn-icon back-btn">&larr;</button>
+        <h1 class="screen-title" data-key="chooseFlavorTitle"></h1>
+    </div>
+    <div id="categories-section">
+      <div class="category-list">
+        <label class="category-card" data-category="couples">
+          <input type="checkbox" class="category-checkbox" value="couples" />
+          <div class="card-content" data-key="categoryCouples"></div>
+        </label>
+        <label class="category-card" data-category="spicy">
+          <input type="checkbox" class="category-checkbox" value="spicy" />
+          <div class="card-content" data-key="categorySpicy"></div>
+        </label>
+        <label class="category-card" data-category="embarrassing">
+          <input type="checkbox" class="category-checkbox" value="embarrassing" />
+          <div class="card-content" data-key="categoryEmbarrassing"></div>
+        </label>
+        <label class="category-card" data-category="funny">
+          <input type="checkbox" class="category-checkbox" value="funny" />
+          <div class="card-content" data-key="categoryFunny"></div>
+        </label>
+        <label class="category-card naughty-category" data-category="naughty">
+          <input type="checkbox" id="naughty-checkbox" class="category-checkbox" value="naughty" disabled />
+          <div class="card-content" data-key="categoryNaughty"></div>
+        </label>
+      </div>
+      <p id="naughty-warning" class="warning-text" data-key="naughtyWarning"></p>
+      <p id="category-warning" class="warning-text" data-key="categoryWarning"></p>
+    </div>
+    <button id="start-game-btn" type="button" class="btn btn-primary" disabled data-key="startGameBtn"></button>
+  </section>
+
+  <section id="game-screen" class="screen">
+    <div id="game-header">
+      <span id="current-player"></span>
+      <span id="lives-display" class="hidden" data-key="livesDisplay"></span>
+    </div>
+
+    <div class="game-content-area">
+      <div id="question-card">
+        <h2 id="question-type-title"></h2>
+        <p id="question-text"></p>
+      </div>
+
+      <div id="truth-dare-select" class="choice-buttons">
+        <button id="choose-truth-btn" type="button" class="btn btn-primary" data-key="truthBtn"></button>
+        <button id="choose-dare-btn" type="button" class="btn btn-secondary" data-key="dareBtn"></button>
+      </div>
+    </div>
+
+    <div id="game-footer">
+      <button id="btn-complete" type="button" class="btn btn-primary hidden" data-key="iAnsweredBtn"></button>
+      <button id="btn-drink" type="button" class="btn btn-secondary" data-key="forfeitDrinkBtn"></button>
+      <button id="end-game-btn" type="button" class="btn btn-secondary" data-key="endGameBtn"></button>
+    </div>
+  </section>
+
+  <section id="end-screen" class="screen">
+    <h1 class="screen-title" data-key="gameOverTitle"></h1>
+    <h2 class="subtitle" data-key="finalStatsTitle"></h2>
+    <div id="final-stats"></div>
+    <div class="intro-buttons">
+      <button id="restart-btn" type="button" class="btn btn-primary" data-key="playAgainBtn"></button>
+      <button id="back-to-main-menu-btn" type="button" class="btn btn-secondary" data-key="backToMenuBtn"></button>
+    </div>
+  </section>
+
+  <section id="credits-screen" class="screen">
+    <div class="screen-header">
+        <button id="back-from-credits-btn" class="btn-icon back-btn">&larr;</button>
+        <h1 class="screen-title" data-key="creditsTitle"></h1>
+    </div>
+    <div class="credits-content">
+      <p><strong data-key="conceptLabel"></strong> <span data-key="conceptText"></span></p>
+      <p><strong data-key="developerLabel"></strong> <span data-key="developerText"></span></p>
+    </div>
+    <button id="socials-btn" type="button" class="btn btn-primary" data-key="socialsBtn"></button>
+  </section>
+
+  <section id="language-selection-screen" class="screen">
+    <div class="screen-header">
+        <button id="back-from-language-btn" class="btn-icon back-btn">&larr;</button>
+        <h1 class="screen-title" data-key="selectLanguageTitle"></h1>
+    </div>
+    <div class="language-options">
+      <label class="language-option">
+        <input type="radio" name="language-select" value="en" checked>
+        <img src="assets/flags/us.png" alt="USA Flag" class="language-flag">
+        <span>English</span>
+      </label>
+      <label class="language-option">
+        <input type="radio" name="language-select" value="hu">
+        <img src="assets/flags/hu.png" alt="Hungary Flag" class="language-flag">
+        <span>Magyar</span>
+      </label>
+      <label class="language-option">
+        <input type="radio" name="language-select" value="sk">
+        <img src="assets/flags/sk.png" alt="Slovakia Flag" class="language-flag">
+        <span>Slovenčina</span>
+      </label>
+    </div>
+  </section>
+
+</main>
+<script type="module" src="script.js"></script>
+</body>
+</html>
