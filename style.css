@@ -28,7 +28,7 @@ body, html {
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Prevent body scrollbar */
-    padding: 10px;
+    padding: 10px; /* Default padding for PC */
     scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
@@ -39,8 +39,8 @@ body, html {
 }
 
 #app {
-    width: 500px;
-    height: 800px;
+    width: 500px; /* Default fixed width for PC */
+    height: 800px; /* Default fixed height for PC */
     margin: auto;
     background: var(--bg-medium); /* Slightly lighter background for the app container */
     border-radius: 24px;
@@ -90,7 +90,7 @@ body, html {
 
 /* Typography */
 .title {
-    font-size: 5rem;
+    font-size: 5rem; /* Default for PC */
     font-weight: 900;
     text-align: center;
     color: var(--primary-accent);
@@ -104,7 +104,7 @@ body, html {
     margin-top: 15px;
 }
 .screen-title {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Default for PC */
     font-weight: 700;
     text-align: center;
     flex-shrink: 0;
@@ -114,13 +114,13 @@ body, html {
 /* Buttons */
 .btn {
     cursor: pointer;
-    padding: 15px 25px;
+    padding: 15px 25px; /* Default for PC */
     border: none;
     border-radius: 12px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.1rem; /* Default for PC */
     transition: all 0.2s ease-out;
-    width: 100%;
+    width: 100%; /* Default is full width of its container, useful for stacking on mobile */
     flex-shrink: 0;
     box-shadow: 0 4px 10px var(--shadow-dark); /* Subtle shadow */
 }
@@ -170,7 +170,7 @@ body, html {
 /* Screen Header for Back Buttons */
 .screen-header {
     display: grid;
-    grid-template-columns: 60px 1fr 60px;
+    grid-template-columns: 60px 1fr 60px; /* Default for PC */
     align-items: center;
     width: 100%;
     margin-bottom: 20px;
@@ -191,8 +191,8 @@ body, html {
     border: none;
     color: var(--text-secondary);
     cursor: pointer;
-    transition: color 0.2s ease-out;
     line-height: 1;
+    transition: color 0.2s ease-out;
 }
 
 .back-btn:hover {
@@ -213,9 +213,11 @@ body, html {
 }
 .intro-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Default to column on PC, but narrower */
     gap: 15px;
     padding: 0 0 20px; /* Adjusted padding */
+    width: 300px; /* Control max width on PC */
+    margin: 0 auto 20px auto; /* Center buttons */
 }
 
 /* Player Setup Screen */
@@ -442,68 +444,146 @@ body, html {
 }
 .category-list {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Default single column for PC for better control */
     gap: 15px;
 }
 
+/* Base style for category buttons */
 .category-card {
     position: relative;
-    border-radius: 16px;
-    overflow: hidden;
+    padding: 0; /* Outer padding controlled by inner .card-content */
+    border: none;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 16px; /* Larger border-radius for the outer container */
+    letter-spacing: 2px; /* Adjusted to match image */
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.3s ease-out; /* Smoother transition for general card properties */
     cursor: pointer;
-    background-color: var(--bg-card);
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
-    border: 2px solid transparent; /* Default transparent border */
-    box-shadow: 0 4px 15px var(--shadow-dark);
-}
-/* Unified gradients for categories to ensure consistency */
-.category-card[data-category="couples"] { background-image: linear-gradient(45deg, #ff7e5f, #feb47b); }
-.category-card[data-category="spicy"] { background-image: linear-gradient(45deg, #e94057, #ff005c); }
-.category-card[data-category="embarrassing"] { background-image: linear-gradient(45deg, #833ab4, #fd1d1d); }
-.category-card[data-category="funny"] { background-image: linear-gradient(45deg, #12c2e9, #c471ed); }
-.category-card[data-category="naughty"] { background-image: linear-gradient(45deg, #43045a, #b4224a); }
-
-
-.category-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px var(--shadow-dark);
-}
-.category-card input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-}
-.category-card .card-content {
-    color: var(--text-primary);
-    font-weight: 900;
-    font-size: 1.8rem;
-    padding: 30px 20px;
-    text-shadow: 0 2px 5px var(--shadow-dark);
-    transition: all 0.2s ease;
-    background: rgba(0,0,0,0.3); /* Subtle overlay */
-    border-radius: 14px;
-    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 80px; /* Increased min-height to match image */
     text-align: center;
+    overflow: hidden;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Subtle default shadow */
+
+    /* Glassmorphism base styles */
+    backdrop-filter: blur(10px); /* Apply blur directly to the card */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    background-color: rgba(32, 32, 32, 0.3); /* Translucent background */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
 }
-.category-card input[type="checkbox"]:checked + .card-content {
-    background: rgba(0,0,0,0.1);
-    border: 2px solid var(--primary-accent); /* Accent border on checked */
-    box-shadow: inset 0 0 10px var(--shadow-dark), 0 0 0 2px var(--primary-accent); /* Inner shadow and subtle outer glow */
+
+/* Specific background gradients for each category based on the image */
+.category-card[data-category="couples"] { background-image: linear-gradient(135deg, rgba(255, 111, 97, 0.3), rgba(255, 154, 139, 0.3)); } /* Coral to Soft Pink-Orange */
+.category-card[data-category="spicy"] { background-image: linear-gradient(135deg, rgba(255, 10, 75, 0.3), rgba(255, 142, 46, 0.3)); } /* Bright Red to Orange */
+.category-card[data-category="embarrassing"] { background-image: linear-gradient(135deg, rgba(167, 65, 255, 0.3), rgba(255, 199, 89, 0.3)); } /* Vibrant Purple to Golden Yellow */
+.category-card[data-category="funny"] { background-image: linear-gradient(135deg, rgba(46, 216, 185, 0.3), rgba(140, 82, 255, 0.3)); } /* Teal to Electric Purple */
+.category-card[data-category="naughty"] { background-image: linear-gradient(135deg, rgba(66, 5, 95, 0.3), rgba(204, 51, 102, 0.3)); } /* Deep Indigo to Dark Rose */
+
+
+.category-card:hover {
+    /* Removed box-shadow glow on hover */
+    transform: translateY(-2px); /* Subtle lift on hover */
+    box-shadow: none; /* Explicitly remove box-shadow on hover */
 }
-.category-card.naughty-category input[type="checkbox"]:disabled + .card-content {
-    background: rgba(0,0,0,0.7);
-    color: #666;
-    border-color: #555;
+
+/* Remove the ::before animation as it's not part of the new design */
+.category-card::before,
+.category-card:hover::before {
+    content: none;
+    display: none;
+}
+
+.category-card:active {
+    box-shadow: 0 0 0 0 transparent; /* No glow on active */
+    transition: box-shadow 0.2s ease-in;
+}
+
+/* Input checkbox is hidden, but its state controls the parent */
+.category-card input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 2; /* Ensure it's clickable above the content */
+}
+
+/* Styles for the text content (acting as the 'span' in user's example) */
+.category-card .card-content {
+    position: relative;
+    z-index: 10; /* Above the parent's background and box-shadow */
+    color: #fff; /* Default text color */
+    font-size: 24px; /* Adjusted to match image */
+    font-weight: 700; /* Adjusted to match image */
+    letter-spacing: 2px; /* Adjusted to match image */
+    text-transform: uppercase;
+    text-shadow: none; /* No initial text glow */
+    transition: text-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition for glow and opacity */
+    background: rgba(0,0,0,0.2); /* Subtle overlay for text contrast */
+    border-radius: 16px; /* Match parent radius */
+    width: 100%;
+    height: 100%;
+    display: flex; /* Ensure flex for centering text within the content area */
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px; /* Padding for the inner content */
+    opacity: 1; /* Default opacity for non-selected text */
+}
+
+/* Text glow for the selected state */
+.category-card:has(input[type="checkbox"]:checked) .card-content {
+    text-shadow:
+        0 0 5px var(--primary-accent),
+        0 0 10px var(--primary-accent),
+        0 0 20px var(--primary-accent),
+        0 0 30px var(--primary-accent); /* Prominent text glow using primary accent color */
+    background: rgba(0,0,0,0.1); /* Slightly lighter overlay when checked */
+    opacity: 1; /* Ensure full opacity when selected */
+}
+
+/* Ensure hover doesn't override glow color if already selected */
+.category-card:has(input[type="checkbox"]:checked):hover .card-content {
+    color: #ffffff; /* Keep text white for glow on hover */
+}
+
+/* Disabled state for all category cards */
+.category-card:has(input[type="checkbox"]:disabled) { /* General disabled state */
+    opacity: 0.7; /* Subtle dimming for disabled state */
     cursor: not-allowed;
-    box-shadow: none;
+    box-shadow: none; /* No glow when disabled */
+    /* Background gradients for disabled state should be defined per category if needed */
+    /* For now, just rely on opacity to dim the existing background */
 }
-.category-card.naughty-category {
-    cursor: not-allowed;
+
+.category-card:has(input[type="checkbox"]:disabled) .card-content { /* General disabled state */
+    color: #666; /* Gray text for disabled */
+    text-shadow: none; /* No glow when disabled */
+    background: rgba(0,0,0,0.5); /* Darker overlay for disabled text */
+    opacity: 0.7; /* Dim text for disabled state */
 }
+
+.category-card:has(input[type="checkbox"]:disabled):hover { /* General disabled state */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Revert to default shadow on hover when disabled */
+    transform: none; /* No transform on hover when disabled */
+}
+
+.category-card:has(input[type="checkbox"]:disabled):has(input[type="checkbox"]:checked) { /* General disabled state */
+    box-shadow: none; /* No glow if somehow checked when disabled */
+    transform: none;
+}
+
+
 .warning-text {
     font-size: 0.9rem;
     color: #ff6b6b;
@@ -522,7 +602,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Default for PC */
     font-size: 1.5rem;
     font-weight: 700;
     flex-shrink: 0;
@@ -562,12 +642,12 @@ body, html {
 }
 #game-footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Default for PC */
     gap: 10px;
     flex-shrink: 0;
 }
 .choice-title {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Default for PC */
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--primary-accent);
@@ -579,7 +659,7 @@ body, html {
 }
 #question-card {
     background-color: var(--bg-card);
-    padding: 30px;
+    padding: 30px; /* Default for PC */
     border-radius: 16px;
     width: 100%;
     min-height: 200px;
@@ -600,14 +680,15 @@ body, html {
 
 #question-type-title {
     color: var(--primary-accent);
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Default for PC */
     font-weight: 700;
     margin-bottom: 10px;
 }
 #question-text {
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* Default for PC */
     line-height: 1.5;
     color: var(--text-primary);
+    margin-bottom: 30px; /* Default for PC */
 }
 
 /* End Screen */
@@ -669,6 +750,65 @@ body, html {
     color: var(--text-primary);
 }
 
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
 /* Credits Screen Styles */
 #credits-screen {
     justify-content: center;
@@ -717,7 +857,7 @@ body, html {
     padding: 12px 20px;
     border-radius: 10px;
     cursor: pointer;
-    width: 200px;
+    width: 200px; /* Default for PC */
     box-shadow: 0 2px 8px var(--shadow-dark);
     transition: all 0.2s ease;
 }
@@ -754,7 +894,7 @@ body, html {
     transform: translate(-50%, -50%);
 }
 .language-option span {
-    font-size: 1.1rem;
+    font-size: 1.1rem; /* Default PC size */
     color: var(--text-primary);
     cursor: pointer;
     flex-grow: 1;
@@ -828,103 +968,26 @@ body, html {
     display: none !important;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 600px) {
-    #app {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        padding: 10px;
-        box-shadow: none;
-    }
-
-    body {
-        padding: 0;
-    }
-
-    .title {
-        font-size: 4rem;
-    }
-
-    .screen-title {
-        font-size: 2rem;
-    }
-
-    .btn {
-        padding: 12px 20px;
-        font-size: 1rem;
-    }
-
-    .category-card .card-content {
-        font-size: 1.5rem;
-        padding: 20px;
-    }
-}
-
-/* Add these rules to your style.css file */
-
-.player-score-item .player-name {
-    display: flex; /* Allow text and status to be inline */
-    align-items: center; /* Vertically align them */
-    gap: 5px; /* Space between name and status */
-}
-
-/* Style for eliminated players in score board */
-.player-score-item.eliminated-score .player-name {
-    color: #FF6347; /* Reddish color for eliminated */
-    font-weight: bold;
-}
-
-/* Style for the winner in score board */
-.player-score-item.winner-score .player-name {
-    color: #FFD700; /* Gold/Yellow color for winner */
-    font-weight: bold;
-}
-
-/* Optional: style for the game over title when a winner is declared */
-#final-stats .winner-message {
-    color: #FFD700; /* Gold/Yellow for winner message */
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-#final-stats .game-over-title {
-    color: var(--primary-accent); /* Keep consistent with existing game over title */
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-}
-
-#final-stats .stats-title {
-    color: var(--text-secondary);
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-/* Add these new rules to your style.css file */
-
-/* General centering for content inside screen */
-.screen-content { /* Assuming you wrap main content of screens in this class if not already done */
+/* General centering for content inside screen (if used) */
+.screen-content {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center vertically if space allows */
-    align-items: center; /* Center horizontally */
-    text-align: center; /* For text alignment within blocks */
-    width: 100%; /* Ensure it takes full width to center its contents */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
 }
 
 /* Specific styling for the end screen stats to ensure centering */
 #end-screen .screen-content {
-    /* If your .screen-content is already flex column and centered, this might not be strictly needed,
-       but it ensures the content inside end-screen is properly centered. */
-    justify-content: flex-start; /* Align to start of column, then center items */
-    padding-top: 20px; /* Add some padding if needed */
+    justify-content: flex-start;
+    padding-top: 20px;
 }
 
 #final-stats {
-    width: 100%; /* Ensure the stats container itself takes full width */
-    text-align: center; /* Center text within the final-stats container */
-    margin-top: 20px; /* Space from buttons above */
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* Style for eliminated players in score board */
@@ -935,7 +998,7 @@ body, html {
 
 /* Style for the winner in score board */
 .player-score-item.winner-score .player-name {
-    color: #FFD700; /* Gold/Yellow color for winner */
+    color: #FFD700; /* Gold/Yellow for winner */
     font-weight: bold;
 }
 
@@ -948,7 +1011,7 @@ body, html {
 }
 
 #final-stats .game-over-title {
-    color: var(--primary-accent); /* Keep consistent with existing game over title */
+    color: var(--primary-accent);
     font-size: 2.2rem;
     margin-bottom: 15px;
 }
@@ -961,7 +1024,7 @@ body, html {
 
 /* Ensure the player-score-item itself is handled for flex or block */
 .player-score-item {
-    display: flex; /* Or block, depending on desired layout */
+    display: flex;
     flex-direction: column; /* Stack name and stats */
     align-items: center; /* Center items horizontally within each score item */
     padding: 10px 0;
@@ -995,4 +1058,2019 @@ body, html {
 
 .player-score-item .score-stats strong {
     color: var(--text-primary);
+}
+
+
+/* Credits Screen Styles */
+#credits-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.credits-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.credits-content p {
+    margin: 0;
+}
+.credits-content strong {
+    color: var(--primary-accent);
+}
+.credits-content .btn {
+    margin-top: 20px;
+    max-width: 250px;
+}
+
+/* Language Selection Screen */
+#language-selection-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.language-options {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-card);
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px; /* Default for PC */
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    transition: all 0.2s ease;
+}
+.language-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+.language-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.language-option input[type="radio"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.language-option input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.language-option span {
+    font-size: 1.1rem; /* Default PC size */
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+}
+.language-flag {
+    width: 28px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-dark);
+}
+
+/* Modal Overlay (for future use, e.g., Naughty pack warning) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px var(--shadow-dark);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General centering for content inside screen (if used) */
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Specific styling for the end screen stats to ensure centering */
+#end-screen .screen-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#final-stats {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for eliminated players in score board */
+.player-score-item.eliminated-score .player-name {
+    color: #FF6347; /* Reddish color for eliminated */
+    font-weight: bold;
+}
+
+/* Style for the winner in score board */
+.player-score-item.winner-score .player-name {
+    color: #FFD700; /* Gold/Yellow for winner */
+    font-weight: bold;
+}
+
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
+/* Credits Screen Styles */
+#credits-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.credits-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.credits-content p {
+    margin: 0;
+}
+.credits-content strong {
+    color: var(--primary-accent);
+}
+.credits-content .btn {
+    margin-top: 20px;
+    max-width: 250px;
+}
+
+/* Language Selection Screen */
+#language-selection-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.language-options {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-card);
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px; /* Default for PC */
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    transition: all 0.2s ease;
+}
+.language-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+.language-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.language-option input[type="radio"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.language-option input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.language-option span {
+    font-size: 1.1rem; /* Default PC size */
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+}
+.language-flag {
+    width: 28px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-dark);
+}
+
+/* Modal Overlay (for future use, e.g., Naughty pack warning) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px var(--shadow-dark);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General centering for content inside screen (if used) */
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Specific styling for the end screen stats to ensure centering */
+#end-screen .screen-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#final-stats {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for eliminated players in score board */
+.player-score-item.eliminated-score .player-name {
+    color: #FF6347; /* Reddish color for eliminated */
+    font-weight: bold;
+}
+
+/* Style for the winner in score board */
+.player-score-item.winner-score .player-name {
+    color: #FFD700; /* Gold/Yellow for winner */
+    font-weight: bold;
+}
+
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
+/* Credits Screen Styles */
+#credits-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.credits-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.credits-content p {
+    margin: 0;
+}
+.credits-content strong {
+    color: var(--primary-accent);
+}
+.credits-content .btn {
+    margin-top: 20px;
+    max-width: 250px;
+}
+
+/* Language Selection Screen */
+#language-selection-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.language-options {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-card);
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px; /* Default for PC */
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    transition: all 0.2s ease;
+}
+.language-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+.language-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.language-option input[type="radio"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.language-option input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.language-option span {
+    font-size: 1.1rem; /* Default PC size */
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+}
+.language-flag {
+    width: 28px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-dark);
+}
+
+/* Modal Overlay (for future use, e.g., Naughty pack warning) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px var(--shadow-dark);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General centering for content inside screen (if used) */
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Specific styling for the end screen stats to ensure centering */
+#end-screen .screen-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#final-stats {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for eliminated players in score board */
+.player-score-item.eliminated-score .player-name {
+    color: #FF6347; /* Reddish color for eliminated */
+    font-weight: bold;
+}
+
+/* Style for the winner in score board */
+.player-score-item.winner-score .player-name {
+    color: #FFD700; /* Gold/Yellow for winner */
+    font-weight: bold;
+}
+
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
+/* Credits Screen Styles */
+#credits-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.credits-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.credits-content p {
+    margin: 0;
+}
+.credits-content strong {
+    color: var(--primary-accent);
+}
+.credits-content .btn {
+    margin-top: 20px;
+    max-width: 250px;
+}
+
+/* Language Selection Screen */
+#language-selection-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.language-options {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-card);
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px; /* Default for PC */
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    transition: all 0.2s ease;
+}
+.language-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+.language-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.language-option input[type="radio"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.language-option input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.language-option span {
+    font-size: 1.1rem; /* Default PC size */
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+}
+.language-flag {
+    width: 28px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-dark);
+}
+
+/* Modal Overlay (for future use, e.g., Naughty pack warning) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px var(--shadow-dark);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General centering for content inside screen (if used) */
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Specific styling for the end screen stats to ensure centering */
+#end-screen .screen-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#final-stats {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for eliminated players in score board */
+.player-score-item.eliminated-score .player-name {
+    color: #FF6347; /* Reddish color for eliminated */
+    font-weight: bold;
+}
+
+/* Style for the winner in score board */
+.player-score-item.winner-score .player-name {
+    color: #FFD700; /* Gold/Yellow for winner */
+    font-weight: bold;
+}
+
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
+/* Credits Screen Styles */
+#credits-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.credits-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.credits-content p {
+    margin: 0;
+}
+.credits-content strong {
+    color: var(--primary-accent);
+}
+.credits-content .btn {
+    margin-top: 20px;
+    max-width: 250px;
+}
+
+/* Language Selection Screen */
+#language-selection-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.language-options {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-card);
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px; /* Default for PC */
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    transition: all 0.2s ease;
+}
+.language-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+.language-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.language-option input[type="radio"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.language-option input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.language-option span {
+    font-size: 1.1rem; /* Default PC size */
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+}
+.language-flag {
+    width: 28px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-dark);
+}
+
+/* Modal Overlay (for future use, e.g., Naughty pack warning) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px var(--shadow-dark);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General centering for content inside screen (if used) */
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Specific styling for the end screen stats to ensure centering */
+#end-screen .screen-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#final-stats {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for eliminated players in score board */
+.player-score-item.eliminated-score .player-name {
+    color: #FF6347; /* Reddish color for eliminated */
+    font-weight: bold;
+}
+
+/* Style for the winner in score board */
+.player-score-item.winner-score .player-name {
+    color: #FFD700; /* Gold/Yellow for winner */
+    font-weight: bold;
+}
+
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
+/* Credits Screen Styles */
+#credits-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.credits-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.credits-content p {
+    margin: 0;
+}
+.credits-content strong {
+    color: var(--primary-accent);
+}
+.credits-content .btn {
+    margin-top: 20px;
+    max-width: 250px;
+}
+
+/* Language Selection Screen */
+#language-selection-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.language-options {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-card);
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px; /* Default for PC */
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    transition: all 0.2s ease;
+}
+.language-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+.language-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.language-option input[type="radio"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.language-option input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.language-option span {
+    font-size: 1.1rem; /* Default PC size */
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+}
+.language-flag {
+    width: 28px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-dark);
+}
+
+/* Modal Overlay (for future use, e.g., Naughty pack warning) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px var(--shadow-dark);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General centering for content inside screen (if used) */
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Specific styling for the end screen stats to ensure centering */
+#end-screen .screen-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#final-stats {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for eliminated players in score board */
+.player-score-item.eliminated-score .player-name {
+    color: #FF6347; /* Reddish color for eliminated */
+    font-weight: bold;
+}
+
+/* Style for the winner in score board */
+.player-score-item.winner-score .player-name {
+    color: #FFD700; /* Gold/Yellow for winner */
+    font-weight: bold;
+}
+
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
+/* Credits Screen Styles */
+#credits-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.credits-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.credits-content p {
+    margin: 0;
+}
+.credits-content strong {
+    color: var(--primary-accent);
+}
+.credits-content .btn {
+    margin-top: 20px;
+    max-width: 250px;
+}
+
+/* Language Selection Screen */
+#language-selection-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.language-options {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bg-card);
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px; /* Default for PC */
+    box-shadow: 0 2px 8px var(--shadow-dark);
+    transition: all 0.2s ease;
+}
+.language-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-dark);
+}
+.language-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.language-option input[type="radio"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+.language-option input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.language-option span {
+    font-size: 1.1rem; /* Default PC size */
+    color: var(--text-primary);
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: left;
+}
+.language-flag {
+    width: 28px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px var(--shadow-dark);
+}
+
+/* Modal Overlay (for future use, e.g., Naughty pack warning) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 30px var(--shadow-dark);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    color: var(--primary-accent);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-content .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* Hidden Utility Class */
+.hidden {
+    display: none !important;
+}
+
+/* General centering for content inside screen (if used) */
+.screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Specific styling for the end screen stats to ensure centering */
+#end-screen .screen-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+#final-stats {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for eliminated players in score board */
+.player-score-item.eliminated-score .player-name {
+    color: #FF6347; /* Reddish color for eliminated */
+    font-weight: bold;
+}
+
+/* Style for the winner in score board */
+.player-score-item.winner-score .player-name {
+    color: #FFD700; /* Gold/Yellow for winner */
+    font-weight: bold;
+}
+
+/* Optional: style for the game over title when a winner is declared */
+#final-stats .winner-message {
+    color: #FFD700; /* Gold/Yellow for winner message */
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#final-stats .game-over-title {
+    color: var(--primary-accent);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+#final-stats .stats-title {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Ensure the player-score-item itself is handled for flex or block */
+.player-score-item {
+    display: flex;
+    flex-direction: column; /* Stack name and stats */
+    align-items: center; /* Center items horizontally within each score item */
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-score-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+.player-score-item .player-name {
+    display: flex; /* Allow text and status to be inline for player name */
+    align-items: center;
+    gap: 5px; /* Space between name and status */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-icon {
+    font-size: 1.5rem; /* Size of the crown/skull icon */
+    margin-bottom: 5px;
+}
+
+.player-score-item .score-stats {
+    display: flex;
+    gap: 15px; /* Space between answers and forfeits */
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.player-score-item .score-stats strong {
+    color: var(--text-primary);
+}
+
+
+/* Responsive adjustments for smaller screens (max-width: 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 0; /* Remove body padding on smaller screens */
+    }
+
+    #app {
+        width: 100vw; /* Take full viewport width */
+        height: 90vh; /* Take full viewport height */
+        border-radius: 0;
+        padding: 10px; /* Reduced padding for mobile */
+        box-shadow: none; /* Remove shadow for full screen app feel */
+    }
+
+    .screen {
+        padding: 15px; /* Slightly reduced screen padding */
+    }
+
+    .title {
+        font-size: 3.5rem; /* Smaller for mobile */
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .screen-title {
+        font-size: 2rem; /* Smaller for mobile headers */
+    }
+
+    .btn {
+        padding: 10px 15px; /* More compact buttons */
+        font-size: 0.95rem; /* Slightly smaller font */
+        width: 85%; /* Make buttons wider for better tap target */
+        max-width: 300px; /* Prevent them from being too wide on slightly larger phones */
+        margin-left: auto; /* Center buttons */
+        margin-right: auto;
+    }
+
+    /* Intro Screen buttons */
+    .intro-buttons {
+        width: 100%; /* Allow buttons container to take full width */
+        gap: 12px; /* Slightly less gap */
+    }
+
+    /* Screen header adjustments for mobile */
+    .screen-header {
+        display: flex; /* Use flexbox for better control */
+        justify-content: space-between; /* Space out items */
+        align-items: center;
+        margin-bottom: 10px; /* Reduced margin */
+    }
+    .screen-header .screen-title {
+        flex-grow: 1; /* Allow title to take available space */
+        text-align: center; /* Center the text */
+        margin-left: 0; /* Remove previous negative margin */
+    }
+    .back-btn {
+        font-size: 1.8rem; /* Make back button larger for touch */
+        flex-shrink: 0; /* Prevent it from shrinking */
+    }
+
+
+    /* Player setup adjustments */
+    .player-row {
+        flex-wrap: wrap; /* Allow elements in player row to wrap */
+        justify-content: center; /* Center items if they wrap */
+    }
+    .player-name-input {
+        width: 100%; /* Full width for input */
+        flex-shrink: 0;
+    }
+    .gender-select {
+        justify-content: center; /* Center gender buttons */
+        width: 100%;
+    }
+    .player-action-buttons {
+        flex-direction: column; /* Stack action buttons */
+        gap: 10px;
+    }
+    .player-action-buttons .btn {
+        width: 85%; /* Match general button width */
+    }
+    #lives-settings {
+        flex-direction: column; /* Stack lives setting elements */
+        align-items: flex-start; /* Align elements to the left */
+        gap: 8px;
+        padding: 10px;
+    }
+    #initial-lives-input {
+        width: 100px; /* Give a bit more width to the input */
+        text-align: left;
+    }
+
+    /* Category selection adjustments */
+    .category-card .card-content {
+        font-size: 1.5rem;
+        padding: 20px;
+        min-height: 100px; /* Slightly smaller min-height */
+    }
+    .category-list {
+        gap: 10px; /* Reduce gap between categories */
+    }
+
+    /* Game Screen adjustments */
+    #game-header {
+        font-size: 1.2rem; /* Further reduced font size */
+        margin-bottom: 8px; /* Slightly reduced margin */
+    }
+    #current-player {
+        font-size: 1.4rem; /* Further reduced font size */
+        margin-bottom: 5px; /* Add or reduce margin */
+    }
+    #lives-display {
+        font-size: 1.05rem; /* Slightly smaller */
+    }
+    #question-card {
+        padding: 10px; /* Further reduced padding */
+        margin-top: 5px; /* Added slight top margin to push it down from player name */
+        margin-bottom: 10px; /* Reduced margin before choice title */
+    }
+    #question-type-title {
+        font-size: 1.2rem;
+        margin-bottom: 6px; /* Further reduced margin */
+    }
+    #question-text {
+        font-size: 1.05rem; /* Slightly smaller */
+        line-height: 1.3; /* Tighter line spacing */
+        margin-bottom: 10px; /* Further reduced margin */
+    }
+    .choice-title {
+        font-size: 1.3rem;
+        margin-bottom: 8px; /* Further reduced margin */
+    }
+    .choice-buttons {
+        gap: 8px; /* Slightly reduced gap */
+        margin-bottom: 10px; /* Add or reduce margin before footer */
+    }
+    #game-footer {
+        gap: 6px; /* Reduced gap between footer buttons */
+        padding-top: 5px; /* Small padding at top of footer */
+    }
+
+    /* End Screen adjustments */
+    #end-screen .screen-title {
+        font-size: 2rem;
+    }
+    #final-stats .player-score-item {
+        flex-direction: row; /* Keep name and stats inline */
+        justify-content: space-between; /* Space out name and stats */
+        align-items: center;
+        padding: 8px 10px;
+    }
+    #final-stats .player-score-item .player-name {
+        font-size: 1rem;
+        margin-bottom: 0; /* Remove extra margin */
+    }
+    #final-stats .player-score-item .score-stats {
+        font-size: 0.85rem;
+        gap: 8px; /* Smaller gap for stats */
+    }
+    #final-stats .game-over-title,
+    #final-stats .winner-message {
+        font-size: 1.8rem;
+    }
+    #final-stats .stats-title {
+        font-size: 1rem;
+    }
+
+    /* Language Selection adjustments */
+    .language-option {
+        width: 90%; /* Increased width for mobile */
+        max-width: 380px; /* Increased max-width for mobile */
+        padding: 12px 25px; /* Increased padding */
+    }
+    .language-option span {
+        font-size: 0.9rem; /* Reduced font size for mobile language names */
+    }
+    .language-flag {
+        width: 24px;
+    }
+}
+
+/* Further refinement for very small screens (e.g., iPhone SE, older Androids) */
+@media (max-width: 400px) {
+    .title {
+        font-size: 3rem;
+    }
+    .subtitle {
+        font-size: 0.8rem;
+    }
+    .screen-title {
+        font-size: 1.6rem;
+    }
+    .btn {
+        font-size: 0.85rem; /* Even smaller button font */
+        padding: 8px 12px; /* Even more compact buttons */
+    }
+    .category-card .card-content {
+        font-size: 1.2rem;
+        padding: 15px;
+    }
+    #game-header {
+        font-size: 1.0rem; /* Smallest font size for header */
+        margin-bottom: 5px;
+    }
+    #current-player {
+        font-size: 1.2rem; /* Smallest font size for current player */
+        margin-bottom: 3px;
+    }
+    #lives-display {
+        font-size: 1.0rem;
+    }
+    #question-card {
+        padding: 8px; /* Smallest padding */
+        margin-top: 3px;
+        margin-bottom: 8px;
+    }
+    #question-type-title {
+        font-size: 1.0rem;
+        margin-bottom: 4px;
+    }
+    #question-text {
+        font-size: 0.95rem; /* Smallest font size for question text */
+        line-height: 1.2; /* Tightest line spacing */
+        margin-bottom: 8px; /* Smallest margin */
+    }
+    .choice-title {
+        font-size: 1.1rem;
+        margin-bottom: 6px; /* Smallest margin */
+    }
+    .choice-buttons {
+        gap: 6px; /* Smallest gap */
+        margin-bottom: 8px;
+    }
+    #game-footer {
+        gap: 4px; /* Even smaller gap between footer buttons */
+        padding-top: 3px;
+    }
+    /* Language Selection adjustments for very small screens */
+    .language-option {
+        width: 95%; /* Make it slightly wider for very small screens */
+        max-width: 380px; /* Maintain max-width */
+        padding: 12px 25px; /* Keep padding consistent */
+    }
+    .language-option span {
+        font-size: 0.8rem; /* Further reduced font size for language names on very small screens */
+    }
 }
